@@ -1,4 +1,4 @@
-name: Add issues and dependabot PRs to ATC project board
+name: Add issues to project board
 
 on:
   issues:
@@ -7,6 +7,12 @@ on:
     types: [labeled]
 
 jobs:
+  echo-label:
+    name: Echo label
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo label
+        run: echo ${{ github.event.label.name }}
   add-to-tech-debt-board:
     name: Add bug or tech debt to Payments Tech Debt Overview board
     runs-on: ubuntu-latest
