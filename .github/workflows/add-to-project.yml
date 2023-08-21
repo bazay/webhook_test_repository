@@ -1,0 +1,18 @@
+name: Add issues and dependabot PRs to ATC project board
+
+on:
+  issues:
+    types: [labeled]
+  pull_request_target:
+    types: [labeled]
+
+jobs:
+  add-to-tech-debt-board:
+    name: Add bug or tech debt to Payments Tech Debt Overview board
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/add-to-project@main
+        with:
+          project-url: https://github.com/users/bazay/projects/2
+          github-token: ${{ secrets.ADD_ISSUE_TO_PROJECT_TOKEN }}
+          labeled: ${{ contains(fromJSON('["bug-external","Bug","support-requests","Technical Debt","Technical Story","Tooling"]'), github.event.label.name) }}
